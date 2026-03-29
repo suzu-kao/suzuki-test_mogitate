@@ -14,22 +14,41 @@ class ProductController extends Controller
     //一覧
     public function index()
     {
-        $products = Product::all();
-        return view('index', compact('products'));
+        $products = Product::paginate(6);
+        return view('product', compact('products'));
+    }
+
+    // 検索
+    public function search(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+        // 並び替え
+        if ($request->sort === 'high') {
+            $query->orderBy('price', 'desc');
+        } elseif ($request->sort === 'low') {
+            $query->orderBy('price', 'asc');
+        }
+        $products = $query->paginate(6);
+        return view('product', compact('products'));
     }
 
     // 詳細
     public function show($productId)
     {
-        $product = Product::find($productId);
-        return view('products.detail', compact('product'));
+        $product = Product::with('seasons')->findOrFail($productId);
+        $seasons = Season::all();
+        return view('detail', compact('product', 'seasons'));
     }
 
     // 登録画面表示
     public function create()
     {
         $seasons = Season::all();
-        return view('products.register', compact('seasons'));
+        return view('register', compact('seasons'));
     }
 
     // 登録処理
@@ -64,14 +83,18 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $productId)
     {
         $product = Product::find($productId);
-        $product ->update($request->all());
+        $data = $request->only([
+            'name',
+            'price',
+            'description',
+        ]);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
             $data['image'] = $path;
         }
 
-        $product->update($data);
+        $product ->update($data);
 
         if ($request->has('seasons')) {
             $product->seasons()->sync($request->seasons);

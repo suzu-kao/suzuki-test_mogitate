@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Models\Product;
+use App\Models\Season;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,30 +15,26 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // 商品一覧
 Route::get('/products', [ProductController::class, 'index']);
 
 // 商品詳細
-Route::get('/products/detail/{id}', [ProductController::class, 'show']);
+Route::get('/products/detail/{productId}', [ProductController::class, 'show']);
 
 
 // 登録画面
-Route::get('/products/register',[ProductController::class], 'create');
+Route::get('/products/register',[ProductController::class, 'create']);
 
 // 商品登録
-Route::post('/products/register',[ProductController::class], 'store');
+Route::post('/products/register',[ProductController::class, 'store']);
 
 // 検索
-Route::get('/products/search', [ProductController::class], 'search');
+Route::get('/products/search', [ProductController::class, 'search']);
 
 // 商品更新
-Route::post('/products/{productsId}/update', [ProductController::class, 'update']);
+Route::post('/products/{productId}/update', [ProductController::class, 'update']);
 
 // 削除
-Route::post('/products/{productsId}/delete', [ProductController::class], 'delete');
+Route::post('/products/{productId}/delete', [ProductController::class, 'destroy']);
 
 
