@@ -1,0 +1,30 @@
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    background-color: #f8f8f8;
+    color: #0f1419;
+}
+
+a {
+    text-decoration: none;
+    color: #0f1419;
+}
+
+.header {
+    width: 100%;
+    background-color: #fff;
+}
+
+.header-navi {
+    margin: 0 auto;
+    max-width: 1200px;
+
+}
+
+.header-logo {
+    color: #f8d64c;
+    font-family: "Bree Serif", serif;
+    font-size: 3rem;
+    padding: 16px;
+}
+
+
