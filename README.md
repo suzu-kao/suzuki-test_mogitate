@@ -77,5 +77,6 @@ DB_PASSWORD=laravel_pass
 - nginx 1.21.1
 
 ## ER図
+<img width="751" height="771" alt="mogitate drawio" src="https://github.com/user-attachments/assets/779b13f7-f6b6-42e6-b6b2-ee1f58e166e8" />
 
 
