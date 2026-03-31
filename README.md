@@ -57,15 +57,11 @@ DB_PASSWORD=laravel_pass
 
 ## 開発環境
 
-  - 商品一覧：http://localhost/
-    
-  - お問い合わせ送信後画面：http://localhost/
-    
-  - 商品登録: http://localhost/
+  - 商品一覧：http://localhost/products
 
-  - ログイン画面：http://localhost/
-
-  - 管理画面：http://localhost/
+  - 商品詳細：http://localhost/products/detail/{productId}
+    
+  - 商品登録: http://localhost/register
     
   - phpMyAdmin：http://localhost:8080/
 
